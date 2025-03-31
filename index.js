@@ -26,6 +26,14 @@ app.use('/api', memberRouter);
 
 app.use("/",express.static('public'));
 
+
+
+app.use("*",(req,res)=>{
+    res.status(404).json({
+        status:404,
+        message:"Page not found"
+    })
+})
 app.use(async(error,req,res)=>{
     res.status(error.statusCode || 500).json({
         status:error.statusCode || 500,
