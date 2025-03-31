@@ -24,7 +24,7 @@ app.use('/api', memberRouter);
  
  
 
-app.use("/",express.static('public'));
+// app.use("/",express.static('public'));
 
 
 
