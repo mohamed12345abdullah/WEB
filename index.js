@@ -14,8 +14,6 @@ app.use('/api', memberRouter);
 
 
 
-
-
 app.use(async(error,req,res)=>{
     res.status(error.statusCode || 500).json({
         status:error.statusCode || 500,

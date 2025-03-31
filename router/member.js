@@ -34,6 +34,4 @@ Router.route('/member/:id/addmonth').
     // delete(controller.deleteMonth);
 
 
-
-
-module.exports=Router;
+module.exports = Router;
