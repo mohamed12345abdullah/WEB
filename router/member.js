@@ -1,6 +1,8 @@
+
+
 const express=require('express');
 
-const Router=express.Router();
+const Router=express.Router()
 
 const controller=require('../controller/member');
 
@@ -28,10 +30,10 @@ Router.route('/member/:memberId/month/:monthId/week/:weekId/task/:taskId').
 
 
 Router.route('/member/:id/addmonth').
-    post(controller.addMonth).
+    post(controller.addMonth)
     // put(controller.updateMonth).
     // get(controller.getMonths).
     // delete(controller.deleteMonth);
 
 
-module.exports = Router;
+module.exports=Router;

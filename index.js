@@ -1,17 +1,29 @@
 const express = require('express');
+const dotenv = require('dotenv');
+dotenv.config();
+const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/robotics', { useNewUrlParser: true, useUnifiedTopology: true });
-
+mongoose.connect(process.env.MONGO_URL);
+mongoose.connection.on('error', (error) => {
+    console.error('MongoDB connection error:', error);
+});
+mongoose.connection.on('connected', () => {
+    console.log('MongoDB connected');
+}); 
+ 
+app.use(cors());
 
 app.use(express.json());
 
+app.use(express.static('public'));
+  
 
 const memberRouter=require('./router/member.js');
 
-app.use('/api', memberRouter);
-
-
+app.use('/api', memberRouter); 
+ 
+ 
 
 
 app.use(async(error,req,res)=>{
