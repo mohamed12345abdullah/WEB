@@ -15,8 +15,9 @@ mongoose.connection.on('connected', () => {
 app.use(cors());
 
 app.use(express.json());
+const path = require('path');
 
-app.use("/",express.static('public'));
+app.use("/",express.static(path.join(__dirname,'public')));
   
 
 const memberRouter=require('./router/member.js');
