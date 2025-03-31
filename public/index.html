@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASSIUT Robotics Web Team Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>ASSIUT Robotics</h1>
+                <p>Web Team Dashboard</p>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-section="members">Members</button>
+                <button class="nav-btn" data-section="tasks">Tasks</button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Members Section -->
+            <section id="members-section" class="section active">
+                <div class="section-header">
+                    <h2>Team Members</h2>
+                    <button id="add-member-btn" class="btn primary">Add Member</button>
+                </div>
+                <div class="members-list" id="members-list">
+                    <!-- Members will be added here dynamically -->
+                </div>
+            </section>
+
+            <!-- Tasks Section -->
+            <section id="tasks-section" class="section">
+                <div class="section-header">
+                    <h2>Tasks Management</h2>
+                    <div class="controls">
+                        <div class="filter">
+                            <select id="month-filter">
+                                <!-- Months will be added dynamically -->
+                            </select>
+                            <select id="member-filter">
+                                <!-- Members will be added dynamically -->
+                            </select>
+                        </div>
+                        <button id="add-month-btn" class="btn primary">Add Month</button>
+                        <button id="add-factor-btn" class="btn secondary">Set Month Factor</button>
+                    </div>
+                </div>
+                <div class="weeks-container">
+                    <!-- Weeks will be added here dynamically -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="member-modal" class="modal">
+        <div class="modal-content">
+            <h3>Add/Edit Member</h3>
+            <form id="member-form">
+                <div class="form-group">
+                    <label for="member-name">Name</label>
+                    <input type="text" id="member-name" name="member-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="member-email">Email</label>
+                    <input type="email" id="member-email" name="member-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="member-college">College</label>
+                    <input type="text" id="member-college" name="member-college" required>
+                </div>
+                <div class="form-group">
+                    <label for="member-year">Year</label>
+                    <input type="text" id="member-year" name="member-year" required>
+                </div>
+                <div class="form-group">
+                    <label for="member-phone">Phone</label>
+                    <input type="tel" id="member-phone" name="member-phone" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn secondary" onclick="closeModal('member-modal')">Cancel</button>
+                    <button type="submit" class="btn primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="month-modal" class="modal">
+        <div class="modal-content">
+            <h3>Add New Month</h3>
+            <form id="month-form">
+                <div class="form-group">
+                    <label for="month-date">Month</label>
+                    <input type="month" id="month-date" name="month-date" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn secondary" onclick="closeModal('month-modal')">Cancel</button>
+                    <button type="submit" class="btn primary">Add Month</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="factor-modal" class="modal">
+        <div class="modal-content">
+            <h3>Set Month Factor</h3>
+            <form id="factor-form">
+                <div class="form-group">
+                    <label for="month-factor">Factor (0.1 - 2.0)</label>
+                    <input type="number" id="month-factor" name="month-factor" min="0.1" max="2.0" step="0.1" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn secondary" onclick="closeModal('factor-modal')">Cancel</button>
+                    <button type="submit" class="btn primary">Set Factor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <h3>Add Task</h3>
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="task-name">Task Name</label>
+                    <input type="text" id="task-name" name="task-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-description">Description</label>
+                    <textarea id="task-description" name="task-description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-start-date">Start Date</label>
+                    <input type="date" id="task-start-date" name="task-start-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-end-date">End Date</label>
+                    <input type="date" id="task-end-date" name="task-end-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-points">Points</label>
+                    <input type="number" id="task-points" name="task-points" min="0" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn secondary" onclick="closeModal('task-modal')">Cancel</button>
+                    <button type="submit" class="btn primary">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="evaluation-modal" class="modal">
+        <div class="modal-content">
+            <h3>Task Evaluation</h3>
+            <form id="evaluation-form">
+                <div class="form-group">
+                    <label for="task-score">Score</label>
+                    <input type="number" id="task-score" name="task-score" min="0" max="100" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-rate">Rate (0-10)</label>
+                    <input type="number" id="task-rate" name="task-rate" min="0" max="10" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn secondary" onclick="closeModal('evaluation-modal')">Cancel</button>
+                    <button type="submit" class="btn primary">Submit Evaluation</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
